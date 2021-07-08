@@ -1,0 +1,19 @@
+{% extends 'plantillas/base.html' %}
+
+{% block body %}
+
+<div id="myDIV" class="container p-3">
+    <h2>Modificar Producto</h2>
+</div>
+
+<div class="container p-3">
+    <form action="{% url 'modificar_producto' un_producto.id %}" method="POST">
+        {% csrf_token %}
+        <div class="container p-3">
+        {{ form }}
+        </div>
+        <input type="submit" value="GUARDAR">
+    </form>
+</div>
+
+{% endblock %}

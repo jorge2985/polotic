@@ -1,0 +1,33 @@
+{% extends 'plantillas/base.html' %}
+{% load static $}
+
+{% block body %}
+<div class="container p-3">
+    <h3>Producto cargado</h3>
+</div>
+<div class="container p-3">
+    <h2>Productos</h2>
+    <ul>
+        {% for un_producto in producto %}
+        
+        <li>
+            
+            {% if perms.vendedor.change_producto %}
+            <a href="{% url 'modificar_producto' un_producto.id %}">{{un_producto.titulo}}</a> / 
+            {% endif %}
+            {% if perms.vendedor.delete_producto %} 
+            <a href="{% url 'eliminar_producto' un_producto.id %}">Eliminar</a>  
+            {% endif %}
+            
+        </li>
+        
+        {% endfor %}
+    </ul>
+    <img src="{% imagenes 'vendedor/power_girl.png' $}" alt="imagen">
+
+<div class="container p-2">
+    <a href="{% url 'index' %}">INICIO</a>
+    <a href="{% url 'alta_producto' %}">CARGAR PRODUCTO</a>
+</div>
+
+{% endblock %}

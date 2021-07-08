@@ -1,0 +1,27 @@
+{% extends "plantillas/base.html" %}
+
+{% block body %}
+<div id="myDIV" class="container p-3">
+<tr>
+    {% for un_producto in producto %}
+    <td><div class="container p-3">
+        <img src="{{ media_url  }}{{ producto.imagen.url }}">
+        <h5>{{un_producto.titulo}}</h5>
+        <p>${{un_producto.precio}}</p>
+        <p>{{un_producto.descripcion}}</p>
+        <a href="{$ 'lista' $}" class="btn btn-primary">Comprar</a>
+
+        {% if perms.vendedor.change_producto %}
+            <a href="{% url 'modificar_producto' un_producto.id %}" class="btn btn-danger">Cambiar Producto</a>
+            {% endif %}
+            {% if perms.vendedor.delete_producto %} 
+            <a href="{% url 'eliminar_producto' un_producto.id %}" class="btn btn-secondary">Eliminar Producto</a>  
+        {% endif %}
+
+        </div>
+    </td>
+</tr>
+    {% endfor %}
+
+</div>
+{% endblock %}
